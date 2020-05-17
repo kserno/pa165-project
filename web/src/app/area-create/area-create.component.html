@@ -1,0 +1,23 @@
+<h1 *ngIf="!isEdit" mat-dialog-title>Create new area</h1>
+<h1 *ngIf="isEdit" mat-dialog-title>Updatearea</h1>
+<div mat-dialog-content>
+  <form [formGroup]="areaForm">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput id="name" type="text" placeholder="Name of area" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input matInput id="description" type="text" placeholder="Description of area" formControlName="description">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Image url</mat-label>
+      <input matInput id="image" type="text" placeholder="Image url for area" formControlName="image">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button *ngIf="!isEdit" mat-button (click)="onSubmit()"cdkFocusInitial>Create</button>
+  <button *ngIf="isEdit" mat-button (click)="onEdit()">Update</button>
+</div>

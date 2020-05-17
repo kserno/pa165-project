@@ -40,6 +40,7 @@ public class User {
     private String imageMimeType;
 
     @OneToMany
+    @JoinColumn(name = "author_id")
     private List<Effectiveness> posts = new ArrayList<>();
 
 

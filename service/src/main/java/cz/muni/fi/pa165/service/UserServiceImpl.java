@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Inject
     private UserDao userDao;
 
     @Autowired

@@ -34,6 +34,7 @@ public class Weapon {
     private AmmunitionType ammunitionType;
 
     @OneToMany
+    @JoinColumn(name = "weapon_id")
     private List<Effectiveness> weaponEffectiveness = new ArrayList<>();
 
     public Long getId() {
@@ -79,6 +80,7 @@ public class Weapon {
     public List<Effectiveness> getWeaponEffectiveness() {
         return weaponEffectiveness;
     }
+
 
     public void setWeaponEffectiveness(List<Effectiveness> weaponEffectiveness) {
         this.weaponEffectiveness = weaponEffectiveness;

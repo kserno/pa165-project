@@ -1,0 +1,43 @@
+<mat-card *ngIf="creature">
+  <img [src]="creature.image" />
+  <mat-card-title>{{ creature.name }}</mat-card-title>
+  <mat-card-content>
+    <p>
+      Height: {{ creature.height }} cm
+    </p>
+    <p>
+      Weight: {{ creature.weight }} kg
+    </p>
+    <mat-list>
+      <button mat-raised-button (click)="addEffectivenessClicked()">ADD EFFECTIVENESS</button>
+      <div mat-subheader>
+        Effective against
+      </div>
+      <mat-list-item *ngFor="let effectiveness of (creature ? creature.weaponEffectiveness : [])">
+        <img mat-list-icon class="creature-icon" [src]="effectiveness.weapon.image" alt="Photo of {{ effectiveness.weapon.name }}"/>
+        <div mat-line><a routerLink="/weapons/{{effectiveness.weapon.id}}">{{ effectiveness.weapon.name }}</a></div>
+        <div mat-line> Rating: {{ effectiveness.rating }} </div>
+        <div mat-line> Added by <a routerLink="/users/{{effectiveness.author.id}}">{{ effectiveness.author.name }}</a> </div>
+        <div>
+          <button mat-icon-button *ngIf="isAdmin || effectiveness.id === userId" (click)="removeEffectiveness(effectiveness.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+      <button mat-raised-button (click)="addAreaClicked()">ADD AREA</button>
+      <div mat-subheader>
+        Spotted in
+      </div>
+      <mat-list-item *ngFor="let area of creature.areas">
+        <img mat-list-icon class="creature-icon" [src]="area.image" alt="Photo of {{ area.name }}"/>
+        <div mat-line> <a routerLink="/areas/{{ area.id }}">{{ area.name }} </a></div>
+        <div>
+          <button mat-icon-button *ngIf="isAdmin" (click)="removeArea(area.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+
+</mat-card>

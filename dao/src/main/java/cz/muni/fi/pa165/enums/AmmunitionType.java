@@ -6,5 +6,5 @@ package cz.muni.fi.pa165.enums;
  * @author Filip Sollar
  */
 public enum AmmunitionType {
-    SMALL, MEDIUM, LARGE
+    NONE, SMALL, MEDIUM, LARGE
 }

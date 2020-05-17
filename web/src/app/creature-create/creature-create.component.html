@@ -1,0 +1,31 @@
+<h1 *ngIf="!isEdit" mat-dialog-title>Create new creature</h1>
+<h1 *ngIf="isEdit" mat-dialog-title>Update creature</h1>
+<div mat-dialog-content>
+  <form [formGroup]="creatureForm">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput id="name" type="text" placeholder="Name of creature" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Height (cm)</mat-label>
+      <input matInput id="height" type="number" placeholder="Height of creature" formControlName="height">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Weight (kg)</mat-label>
+      <input matInput id="weight" type="number" placeholder="Weight of creature" formControlName="weight">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Agility</mat-label>
+      <input matInput id="agility" type="number" placeholder="Agility of creature" formControlName="agility">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Image url</mat-label>
+      <input matInput id="image" type="text" placeholder="Image url for creature" formControlName="image">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button *ngIf="!isEdit" mat-button (click)="onSubmit()" cdkFocusInitial>Create</button>
+  <button *ngIf="isEdit" mat-button (click)="onUpdate()">Update</button>
+</div>

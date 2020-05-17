@@ -1,0 +1,10 @@
+p.card-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 40px;
+}
+
+.area-card {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}

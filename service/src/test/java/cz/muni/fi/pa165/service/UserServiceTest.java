@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -19,19 +20,21 @@ import static org.mockito.Mockito.verify;
  * @author Filip Sollar
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
-public class UserServiceTest {
+public class UserServiceTest extends AbstractTestNGSpringContextTests {
+
+    @Mock
+    private UserDao userDao;
 
     @Autowired
     @InjectMocks
     private UserService userService;
 
-    @Mock
-    private UserDao userDao;
 
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
+
 
     @Test
     public void createUser_success() {
@@ -50,7 +53,7 @@ public class UserServiceTest {
     @Test
     public void getUserById_success() {
         userService.getUserById(0L);
-        verify(userService).getUserById(0L);
+        verify(userDao).retrieve(0L);
     }
 
 

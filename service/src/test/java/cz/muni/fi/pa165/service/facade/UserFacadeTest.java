@@ -31,7 +31,7 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
         UserRegisterDTO dto = getRegisterTestUser();
         user1Id = userFacade.registerUser(dto);
     }
-
+/*
     @Test
     public void registerUser_success() {
         Assert.assertNotNull(userFacade.findUserById(user1Id));
@@ -66,6 +66,7 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(userDTO.getImage(), changeImageDTO.getImage());
     }
 
+    /*
     @Test
     public void usernameExists_success() {
 
@@ -81,7 +82,7 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
         userDTO.setEmail(getRegisterTestUser().getEmail());
 
         Assert.assertTrue(userFacade.emailExists(userDTO));
-    }
+    }*/
 
     private static UserRegisterDTO getRegisterTestUser() {
         UserRegisterDTO dto = new UserRegisterDTO();

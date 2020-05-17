@@ -25,6 +25,7 @@ public class Area {
     private String name;
 
     @NotNull
+    @Column(length = 2048)
     private String description;
 
     private String image;

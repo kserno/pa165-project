@@ -1,0 +1,31 @@
+<mat-card *ngIf="weapon">
+  <img [src]="weapon.image" />
+  <mat-card-title>{{ weapon.name }}</mat-card-title>
+  <mat-card-content>
+    <p>
+      Gun reach: {{ weapon.gunReach }} m
+    </p>
+    <p>
+      Ammunition type: {{ weapon.ammunitionType }}
+    </p>
+    <mat-list>
+      <button mat-raised-button (click)="addEffectivenessClicked()">ADD EFFECTIVENESS</button>
+      <div mat-subheader>
+        Effective against
+      </div>
+      <mat-list-item *ngFor="let effectiveness of (weapon ? weapon.weaponEffectiveness : [])">
+        <img mat-list-icon class="creature-icon" [src]="effectiveness.creature.image" alt="Photo of {{ effectiveness.creature.name }}"/>
+        <div mat-line> <a routerLink="/creatures/{{ effectiveness.creature.id }}"> {{ effectiveness.creature.name }} </a></div>
+        <div mat-line> Rating: {{ effectiveness.rating }} </div>
+        <div mat-line> Added by <a routerLink="/users/{{effectiveness.author.id}}">{{ effectiveness.author.name }}</a> </div>
+
+        <div>
+          <button mat-icon-button *ngIf="isAdmin || effectiveness.id === userId" (click)="removeEffectiveness(effectiveness.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+
+</mat-card>

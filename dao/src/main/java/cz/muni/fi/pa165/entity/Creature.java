@@ -32,13 +32,14 @@ public class Creature {
     private String image;
 
     @OneToMany
+    @JoinColumn(name = "creature_id")
     private List<Effectiveness> weaponEffectiveness = new ArrayList<Effectiveness>();
 
     @ManyToMany
     @JoinTable(
             name = "creature_area",
-            joinColumns = @JoinColumn(name = "creature_id"),
-            inverseJoinColumns = @JoinColumn(name = "area_id")
+            joinColumns = { @JoinColumn(name = "creature_id") },
+            inverseJoinColumns = { @JoinColumn(name = "area_id") }
     )
     private List<Area> areas = new ArrayList<Area>();
 
@@ -88,6 +89,10 @@ public class Creature {
 
     public void setWeaponEffectiveness(List<Effectiveness> weaponEffectiveness) {
         this.weaponEffectiveness = weaponEffectiveness;
+    }
+
+    public void addArea(Area area) {
+        areas.add(area);
     }
 
     public List<Area> getAreas() {

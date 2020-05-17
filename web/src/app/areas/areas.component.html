@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let area of areas">
+    <mat-card (click)="navigateToDetail(area.id)" class="area-card">
+      <mat-card-header>
+        <mat-card-title>{{ area.name }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="area.image" alt="Photo of {{ area.name}}">
+      <mat-card-content>
+        <p class="card-description">
+          {{ area.description }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button *ngIf="isAdmin" mat-button (click)="editArea($event, area)">EDIT</button>
+        <button *ngIf="isAdmin" mat-button (click)="deleteArea($event, area)">DELETE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+<button *ngIf="isAdmin" mat-fab class="md-fab-bottom-right2" (click)="createClicked()"><mat-icon>add</mat-icon></button>
+
+
+
+

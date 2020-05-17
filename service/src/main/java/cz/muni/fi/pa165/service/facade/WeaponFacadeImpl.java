@@ -71,6 +71,7 @@ public class WeaponFacadeImpl implements WeaponFacade {
         effectiveness.setWeapon(weapon);
         effectiveness.setCreature(creature);
         effectiveness.setAuthor(author);
+        effectiveness.setRating(weaponEffectivenessCreateDTO.getRating());
 
         effectivenessService.createEffectiveness(effectiveness);
     }

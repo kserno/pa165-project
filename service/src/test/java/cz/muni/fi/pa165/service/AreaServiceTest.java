@@ -75,20 +75,20 @@ public class AreaServiceTest extends AbstractTestNGSpringContextTests {
     public void addAreaToCreature_success() {
         Area area = mock(Area.class);
         Creature creature = mock(Creature.class);
-        when(area.getCreatures()).thenReturn(mock(List.class));
+        when(creature.getAreas()).thenReturn(mock(List.class));
 
         areaService.addCreatureToArea(area, creature);
-        Mockito.verify(area.getCreatures(), times(1)).contains(creature);
-        Mockito.verify(area.getCreatures(), times(1)).add(creature);
+        Mockito.verify(creature.getAreas(), times(1)).contains(area);
+        Mockito.verify(creature.getAreas(), times(1)).add(area);
     }
 
     @Test
     public void removeAreaFromCreature_success() {
         Area area = mock(Area.class);
         Creature creature = mock(Creature.class);
-        when(area.getCreatures()).thenReturn(mock(List.class));
+        when(creature.getAreas()).thenReturn(mock(List.class));
 
         areaService.removeCreatureFromArea(area, creature);
-        Mockito.verify(area.getCreatures()).remove(creature);
+        Mockito.verify(creature.getAreas()).remove(area);
     }
 }

@@ -9,6 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+
     <artifactId>dao</artifactId>
     <build>
         <plugins>
@@ -22,6 +23,7 @@
             </plugin>
         </plugins>
     </build>
+
 
 
 

@@ -34,15 +34,15 @@ public class AreaServiceImpl implements AreaService {
     }
 
     public void addCreatureToArea(Area area, Creature creature) {
-        if (area.getCreatures().contains(creature)) {
+        if (creature.getAreas().contains(area)) {
             throw new IllegalArgumentException("Area already contains creature");
         }
-        area.getCreatures().add(creature);
+        creature.getAreas().add(area);
     }
 
     @Override
     public void removeCreatureFromArea(Area area, Creature creature) {
-        area.getCreatures().remove(creature);
+        creature.getAreas().remove(area);
     }
 
     @Override

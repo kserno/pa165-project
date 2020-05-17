@@ -9,9 +9,27 @@ import cz.muni.fi.pa165.api.dto.weapon.WeaponListDTO;
  */
 public class EffectivenessDTO {
 
+    private Long id;
     private CreatureListDTO creature;
     private WeaponListDTO weapon;
     private UserListDTO author;
+    private double rating;
+
+    public Long getId() {
+        return id;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public CreatureListDTO getCreature() {
         return creature;

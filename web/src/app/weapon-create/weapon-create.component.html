@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Create new weapon</h1>
+<h1 mat-dialog-title>Create new weapon</h1>
+<div mat-dialog-content>
+  <form [formGroup]="weaponForm">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput id="name" type="text" placeholder="Name of weapon" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Gunreach (m)</mat-label>
+      <input matInput id="gunReach" type="number" placeholder="Gunreach of weapon" formControlName="gunReach">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Image url</mat-label>
+      <input matInput id="image" type="text" placeholder="Image url for weapon" formControlName="image">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Ammunition type</mat-label>
+      <mat-select formControlName="ammunitionType">
+        <mat-option value="NONE">None</mat-option>
+        <mat-option value="SMALL">Small</mat-option>
+        <mat-option value="MEDIUM">Medium</mat-option>
+        <mat-option value="LARGE">Large</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="onSubmit()"cdkFocusInitial>Create</button>
+</div>

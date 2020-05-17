@@ -1,0 +1,27 @@
+<mat-card *ngIf="user">
+  <img src="data:image/jpeg;base64,{{user.image}}"/>
+  <mat-card-title>{{user.name}}</mat-card-title>
+  <mat-card-subtitle>{{user.username}}</mat-card-subtitle>
+  <mat-card-content>
+    Email: {{user.email}}
+    <mat-list>
+      <div mat-subheader>Posts</div>
+      <mat-list-item *ngFor="let post of user.posts">
+        <img mat-list-icon class="creature-icon" [src]="post.weapon.image" alt="Photo of {{ post.weapon.name }}"/>
+        <div mat-line> <a routerLink="/weapons/{{ post.weapon.id }}"> {{ post.weapon.name }} </a></div>
+        <div mat-line> Against: <a routerLink="/creatures/{{post.creature.id}}">{{ post.creature.name }}</a> </div>
+        <div mat-line> Rating: {{ post.rating }} </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions *ngIf="user.id == authService.GetUserId()">
+    <label class="image-upload-container btn btn-bwm">
+      <span>Choose new picture </span>
+      <input #imageInput
+             type="file"
+             accept="image/*"
+             (change)="setImage(imageInput)">
+    </label>
+    <button mat-button (click)="changeImage()">Change image</button>
+  </mat-card-actions>
+</mat-card>

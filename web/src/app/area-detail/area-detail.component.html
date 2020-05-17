@@ -1,0 +1,26 @@
+<mat-card *ngIf="area">
+  <img [src]="area.image" />
+  <mat-card-title>{{ area.name }}</mat-card-title>
+  <mat-card-content>
+    <p>
+      {{ area.description }} m
+    </p>
+
+    <mat-list>
+      <button mat-raised-button (click)="addCreatureClicked()">ADD CREATURE</button>
+      <div mat-subheader>
+        Creatures in this area
+      </div>
+      <mat-list-item *ngFor="let creature of (area ? area.creatures : [])">
+        <img mat-list-icon class="creature-icon" [src]="creature.image" alt="Photo of {{ area.name }}"/>
+        <div mat-line><a routerLink="/creatures/{{creature.id}}">{{ creature.name }}</a> </div>
+        <div>
+          <button mat-icon-button *ngIf="isAdmin" (click)="removeCreature(creature.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+
+</mat-card>

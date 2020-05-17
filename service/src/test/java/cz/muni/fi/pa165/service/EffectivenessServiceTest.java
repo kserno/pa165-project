@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -18,14 +19,14 @@ import static org.mockito.Mockito.verify;
  * @author Filip Sollar
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
-public class EffectivenessServiceTest {
+public class EffectivenessServiceTest extends AbstractTestNGSpringContextTests {
+
+    @Mock
+    private EffectivenessDao effectivenessDao;
 
     @Autowired
     @InjectMocks
     private EffectivenessService effectivenessService;
-
-    @Mock
-    private EffectivenessDao effectivenessDao;
 
     @BeforeClass
     public void setup() throws ServiceException {

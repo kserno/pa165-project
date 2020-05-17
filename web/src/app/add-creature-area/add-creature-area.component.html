@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Add creature spotted</h1>
+<div mat-dialog-content>
+  <form [formGroup]="areaCreatureForm">
+
+    <mat-form-field *ngIf="!data.area">
+      <mat-label>Area</mat-label>
+      <mat-select formControlName="areaId">
+        <mat-option [value]="area.id" *ngFor="let area of areas">{{ area.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field *ngIf="!data.creature">
+      <mat-label>Creature</mat-label>
+      <mat-select formControlName="creatureId">
+        <mat-option [value]="creature.id" *ngFor="let creature of creatures">{{ creature.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="onSubmit()"cdkFocusInitial>Add</button>
+</div>
