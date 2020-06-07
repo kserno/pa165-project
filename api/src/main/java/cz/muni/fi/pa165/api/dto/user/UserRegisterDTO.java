@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.api.dto.user;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * @author Filip Sollar
@@ -49,5 +50,21 @@ public class UserRegisterDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserRegisterDTO that = (UserRegisterDTO) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(username, that.username) &&
+                Objects.equals(password, that.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, email, username, password);
     }
 }

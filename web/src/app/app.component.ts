@@ -1,7 +1,8 @@
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {AuthService} from './service/auth.service';
 import {Router} from '@angular/router';
+import {MatSidenav} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,9 @@ export class AppComponent implements OnDestroy {
   title = 'web';
 
   mobileQuery: MediaQueryList;
+
+  @ViewChild('snav', { static: false }) sidenav: MatSidenav;
+
 
   private readonly mobileQueryListener: () => void;
   isAdmin = false;
@@ -38,6 +42,9 @@ export class AppComponent implements OnDestroy {
     this.isLoggedIn = this.authService.IsLoggedIn();
     if (!this.isLoggedIn) {
       this.router.navigate(['/login']);
+      if (this.sidenav != null) {
+        this.sidenav.close();
+      }
     }
   }
 

@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.api.dto.effectiveness.EffectivenessDTO;
 import cz.muni.fi.pa165.api.enums.AmmunitionType;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Filip Sollar
@@ -66,5 +67,23 @@ public class WeaponDTO {
 
     public void setWeaponEffectiveness(List<EffectivenessDTO> weaponEffectiveness) {
         this.weaponEffectiveness = weaponEffectiveness;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WeaponDTO weaponDTO = (WeaponDTO) o;
+        return Double.compare(weaponDTO.gunReach, gunReach) == 0 &&
+                Objects.equals(id, weaponDTO.id) &&
+                Objects.equals(name, weaponDTO.name) &&
+                ammunitionType == weaponDTO.ammunitionType &&
+                Objects.equals(image, weaponDTO.image) &&
+                Objects.equals(weaponEffectiveness, weaponDTO.weaponEffectiveness);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, ammunitionType, gunReach, image, weaponEffectiveness);
     }
 }

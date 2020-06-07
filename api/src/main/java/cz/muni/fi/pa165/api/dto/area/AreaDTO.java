@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.api.dto.area;
 import cz.muni.fi.pa165.api.dto.creature.CreatureDTO;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Filip Sollar
@@ -53,5 +54,22 @@ public class AreaDTO {
 
     public void setCreatures(List<CreatureDTO> creatures) {
         this.creatures = creatures;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AreaDTO areaDTO = (AreaDTO) o;
+        return Objects.equals(id, areaDTO.id) &&
+                Objects.equals(name, areaDTO.name) &&
+                Objects.equals(description, areaDTO.description) &&
+                Objects.equals(image, areaDTO.image) &&
+                Objects.equals(creatures, areaDTO.creatures);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, image, creatures);
     }
 }

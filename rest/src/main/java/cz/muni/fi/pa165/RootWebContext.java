@@ -41,7 +41,6 @@ public class RootWebContext implements WebMvcConfigurer {
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH));
 
-
         objectMapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
 
         jsonConverter.setObjectMapper(objectMapper);

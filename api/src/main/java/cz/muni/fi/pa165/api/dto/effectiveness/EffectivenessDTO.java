@@ -4,6 +4,8 @@ import cz.muni.fi.pa165.api.dto.creature.CreatureListDTO;
 import cz.muni.fi.pa165.api.dto.user.UserListDTO;
 import cz.muni.fi.pa165.api.dto.weapon.WeaponListDTO;
 
+import java.util.Objects;
+
 /**
  * @author Filip Sollar
  */
@@ -53,5 +55,22 @@ public class EffectivenessDTO {
 
     public void setAuthor(UserListDTO author) {
         this.author = author;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EffectivenessDTO that = (EffectivenessDTO) o;
+        return Double.compare(that.rating, rating) == 0 &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(creature, that.creature) &&
+                Objects.equals(weapon, that.weapon) &&
+                Objects.equals(author, that.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, creature, weapon, author, rating);
     }
 }

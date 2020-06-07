@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AreaService} from '../service/area.service';
-import {WeaponCreateComponent} from '../weapon-create/weapon-create.component';
 import {AreaCreateComponent} from '../area-create/area-create.component';
 import {MatDialog} from '@angular/material';
 import {AuthService} from '../service/auth.service';
@@ -22,6 +21,10 @@ export class AreasComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    if (!this.authService.IsLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.isAdmin = this.authService.IsAdmin();
     this.authService.userObservable$.subscribe((user) => {
       this.isAdmin = this.authService.IsAdmin();

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {UserService} from '../service/user.service';
 import {AuthService} from '../service/auth.service';
-import {log} from 'util';
 import {Router} from '@angular/router';
 
 @Component({
@@ -13,6 +12,8 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm;
+
+  error: string = null;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService,
               private authService: AuthService, private router: Router) {
@@ -35,6 +36,13 @@ export class LoginComponent implements OnInit {
     this.userService.Login(loginData).subscribe((user) => {
       this.authService.SaveUser(user);
       this.navigateHome();
+    }, body => {
+      const error = body.error;
+      if (error != null && error.errors != null && error.errors.length > 0) {
+        this.error = error.errors[0];
+      } else {
+        this.error = null;
+      }
     });
 
   }

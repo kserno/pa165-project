@@ -52,6 +52,9 @@ public class UserFacadeImpl implements UserFacade {
 
     public boolean authenticate(UserAuthenticateDTO userAuthenticateDTO) {
         User user = userService.findUserByEmail(userAuthenticateDTO.getEmail());
+        if (user == null) {
+            return false;
+        }
         return userService.authenticate(user, userAuthenticateDTO.getPassword());
     }
 

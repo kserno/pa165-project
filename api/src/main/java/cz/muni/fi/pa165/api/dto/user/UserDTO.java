@@ -2,7 +2,9 @@ package cz.muni.fi.pa165.api.dto.user;
 
 import cz.muni.fi.pa165.api.dto.effectiveness.EffectivenessDTO;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Filip Sollar
@@ -85,5 +87,27 @@ public class UserDTO {
 
     public void setImageMimeType(String imageMimeType) {
         this.imageMimeType = imageMimeType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDTO userDTO = (UserDTO) o;
+        return isAdmin == userDTO.isAdmin &&
+                Objects.equals(id, userDTO.id) &&
+                Objects.equals(name, userDTO.name) &&
+                Objects.equals(username, userDTO.username) &&
+                Objects.equals(email, userDTO.email) &&
+                Arrays.equals(image, userDTO.image) &&
+                Objects.equals(imageMimeType, userDTO.imageMimeType) &&
+                Objects.equals(posts, userDTO.posts);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, name, username, email, isAdmin, imageMimeType, posts);
+        result = 31 * result + Arrays.hashCode(image);
+        return result;
     }
 }

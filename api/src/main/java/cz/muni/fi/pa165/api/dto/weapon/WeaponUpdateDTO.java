@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.api.dto.weapon;
 import cz.muni.fi.pa165.api.enums.AmmunitionType;
 
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * @author Filip Sollar
@@ -48,5 +49,21 @@ public class WeaponUpdateDTO {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WeaponUpdateDTO that = (WeaponUpdateDTO) o;
+        return Double.compare(that.gunReach, gunReach) == 0 &&
+                Objects.equals(name, that.name) &&
+                ammunitionType == that.ammunitionType &&
+                Objects.equals(image, that.image);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, ammunitionType, gunReach, image);
     }
 }
