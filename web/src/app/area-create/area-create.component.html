@@ -1,6 +1,7 @@
 <h1 *ngIf="!isEdit" mat-dialog-title>Create new area</h1>
-<h1 *ngIf="isEdit" mat-dialog-title>Updatearea</h1>
+<h1 *ngIf="isEdit" mat-dialog-title>Update area</h1>
 <div mat-dialog-content>
+
   <form [formGroup]="areaForm">
     <mat-form-field>
       <mat-label>Name</mat-label>
@@ -15,6 +16,14 @@
       <input matInput id="image" type="text" placeholder="Image url for area" formControlName="image">
     </mat-form-field>
   </form>
+  <div *ngIf="submitted">
+    <div *ngIf="areaForm.controls.name.invalid">
+      <div *ngIf="areaForm.controls.name.errors.required" style="color: red">Name is required</div>
+    </div>
+    <div *ngIf="areaForm.controls.description.invalid">
+      <div *ngIf="areaForm.controls.description.errors.required" style="color: red">Description is required</div>
+    </div>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="cancel()">Cancel</button>

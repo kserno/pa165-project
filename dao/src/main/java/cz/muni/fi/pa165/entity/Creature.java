@@ -22,7 +22,6 @@ public class Creature {
     @NotNull
     private String name;
 
-
     private double weight;
 
     private double agility;

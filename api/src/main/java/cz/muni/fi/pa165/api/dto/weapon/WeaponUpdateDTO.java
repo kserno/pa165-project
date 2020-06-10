@@ -11,6 +11,9 @@ import java.util.Objects;
 public class WeaponUpdateDTO {
 
     @NotNull
+    private String id;
+
+    @NotNull
     private String name;
 
     private AmmunitionType ammunitionType;
@@ -51,12 +54,21 @@ public class WeaponUpdateDTO {
         this.image = image;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WeaponUpdateDTO that = (WeaponUpdateDTO) o;
         return Double.compare(that.gunReach, gunReach) == 0 &&
+                Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
                 ammunitionType == that.ammunitionType &&
                 Objects.equals(image, that.image);
@@ -64,6 +76,6 @@ public class WeaponUpdateDTO {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, ammunitionType, gunReach, image);
+        return Objects.hash(id, name, ammunitionType, gunReach, image);
     }
 }

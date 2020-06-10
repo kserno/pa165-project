@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {WeaponService} from '../service/weapon.service';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 interface WeaponDialogData {
@@ -16,6 +16,8 @@ export class WeaponCreateComponent implements OnInit {
   weaponForm;
   isEdit = this.data !== null && this.data.weapon !== null;
 
+  submitted = false;
+
   constructor(public dialogRef: MatDialogRef<WeaponCreateComponent>,
               private weaponService: WeaponService,
               private formBuilder: FormBuilder,
@@ -24,18 +26,18 @@ export class WeaponCreateComponent implements OnInit {
   ngOnInit() {
     if (!this.isEdit) {
       this.weaponForm = this.formBuilder.group({
-        name: [],
-        gunReach: [],
+        name: ['', Validators.required],
+        gunReach: ['', Validators.required],
         image: [],
-        ammunitionType: []
+        ammunitionType: ['', Validators.required]
       });
     } else {
       this.weaponForm = this.formBuilder.group({
         id: [this.data.weapon.id],
-        name: [this.data.weapon.name],
-        gunReach: [this.data.weapon.gunReach],
+        name: [this.data.weapon.name, Validators.required],
+        gunReach: [this.data.weapon.gunReach, Validators.required],
         image: [this.data.weapon.image],
-        ammunitionType: [this.data.weapon.ammunitionType]
+        ammunitionType: [this.data.weapon.ammunitionType, Validators.required]
       });
     }
   }
@@ -45,7 +47,27 @@ export class WeaponCreateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+
+    if (this.weaponForm.invalid) {
+      return;
+    }
+
     this.weaponService.CreateWeapon(this.weaponForm.value).subscribe((weapon) => {
+      this.dialogRef.close();
+    });
+  }
+
+  onEdit() {
+    this.submitted = true;
+
+    if (this.weaponForm.invalid) {
+      return;
+    }
+    const data = this.weaponForm.value;
+    data.id = this.data.weapon.id;
+
+    this.weaponService.UpdateWeapon(data).subscribe((weapon) => {
       this.dialogRef.close();
     });
   }

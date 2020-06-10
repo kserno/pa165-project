@@ -61,11 +61,11 @@ public class CreaturesController {
         logger.debug("rest updateCreature()");
 
         try {
-            creature.setId(id);
+//            creature.setId(id);
             creatureFacade.updateCreature(creature);
             return creatureFacade.getCreatureById(id);
         } catch (Exception ex) {
-            throw new ResourceAlreadyExistingException();
+            throw new GlobalException(ex.getMessage());
         }
     }
 

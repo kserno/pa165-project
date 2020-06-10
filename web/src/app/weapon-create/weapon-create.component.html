@@ -1,5 +1,5 @@
-<h1 mat-dialog-title>Create new weapon</h1>
-<h1 mat-dialog-title>Create new weapon</h1>
+<h1 mat-dialog-title *ngIf="!isEdit">Create new weapon</h1>
+<h1 mat-dialog-title *ngIf="isEdit">Update weapon</h1>
 <div mat-dialog-content>
   <form [formGroup]="weaponForm">
     <mat-form-field>
@@ -24,8 +24,21 @@
       </mat-select>
     </mat-form-field>
   </form>
+  <div *ngIf="submitted">
+    <div *ngIf="weaponForm.controls.name.invalid">
+      <div *ngIf="weaponForm.controls.name.errors.required" style="color: red">Name is required</div>
+    </div>
+    <div *ngIf="weaponForm.controls.gunReach.invalid">
+      <div *ngIf="weaponForm.controls.gunReach.errors.required" style="color: red">Gun reach is required</div>
+    </div>
+    <div *ngIf="weaponForm.controls.ammunitionType.invalid">
+      <div *ngIf="weaponForm.controls.ammunitionType.errors.required" style="color: red">Ammunition type is required</div>
+    </div>
+
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="cancel()">Cancel</button>
-  <button mat-button (click)="onSubmit()"cdkFocusInitial>Create</button>
+  <button mat-button *ngIf="isEdit" (click)="onEdit()">Update</button>
+  <button mat-button *ngIf="!isEdit" (click)="onSubmit()"cdkFocusInitial>Create</button>
 </div>

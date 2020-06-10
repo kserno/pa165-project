@@ -23,6 +23,20 @@
       <input matInput id="image" type="text" placeholder="Image url for creature" formControlName="image">
     </mat-form-field>
   </form>
+  <div *ngIf="submitted">
+    <div *ngIf="creatureForm.controls.name.invalid">
+      <div *ngIf="creatureForm.controls.name.errors.required" style="color: red">Name is required</div>
+    </div>
+    <div *ngIf="creatureForm.controls.height.invalid">
+      <div *ngIf="creatureForm.controls.height.errors.required" style="color: red">Height is required</div>
+    </div>
+    <div *ngIf="creatureForm.controls.weight.invalid">
+      <div *ngIf="creatureForm.controls.weight.errors.required" style="color: red">Weight is required</div>
+    </div>
+    <div *ngIf="creatureForm.controls.agility.invalid">
+      <div *ngIf="creatureForm.controls.agility.errors.required" style="color: red">Agility is required</div>
+    </div>
+  </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="cancel()">Cancel</button>

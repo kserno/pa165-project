@@ -36,5 +36,9 @@ export class WeaponService {
   AddEffectiveness(id: number, effectiveness: FormData): Observable<void> {
     return this.http.post<void>(API_URL + id + '/effectiveness/', effectiveness);
   }
+
+  UpdateWeapon(weapon: Weapon) {
+    return this.http.put<void>(API_URL + weapon.id, weapon);
+  }
 }
 

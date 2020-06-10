@@ -59,6 +59,11 @@ export class CreaturesComponent implements OnInit {
       width: '400px',
       data: {creature}
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.loadData();
+    });
   }
 
   navigateToDetail(id: number) {

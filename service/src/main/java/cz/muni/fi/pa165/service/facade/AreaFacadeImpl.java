@@ -15,19 +15,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Service
 @Transactional
 public class AreaFacadeImpl implements AreaFacade {
 
-    @Autowired
+    @Inject
     private AreaService areaService;
 
-    @Autowired
+    @Inject
     private CreatureService creatureService;
 
-    @Autowired
+    @Inject
     private BeanMappingService beanMappingService;
 
     public List<AreaListDTO> getAllAreas() {

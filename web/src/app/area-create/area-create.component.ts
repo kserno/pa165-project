@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {AreaService} from '../service/area.service';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 interface AreaDialogData {
@@ -17,6 +17,8 @@ export class AreaCreateComponent implements OnInit {
   areaForm;
   isEdit = this.data !== null && this.data.area !== null;
 
+  submitted = false;
+
   constructor(
     public dialogRef: MatDialogRef<AreaCreateComponent>,
     private areaService: AreaService,
@@ -27,20 +29,26 @@ export class AreaCreateComponent implements OnInit {
   ngOnInit() {
     if (this.data !== null && this.data.area) {
       this.areaForm = this.formBuilder.group({
-        name: [this.data.area.name],
-        description: [this.data.area.description],
+        name: [this.data.area.name, [Validators.required]],
+        description: [this.data.area.description, [Validators.required]],
         image: [this.data.area.image]
       });
     } else {
       this.areaForm = this.formBuilder.group({
-        name: [],
-        description: [],
+        name: ['', [Validators.required]],
+        description: ['', [Validators.required]],
         image: []
       });
     }
   }
 
   onEdit() {
+    this.submitted = true;
+
+    if (this.areaForm.invalid) {
+      return;
+    }
+
     const data = this.areaForm.value;
     data.id = this.data.area.id;
     this.areaService.UpdateArea(data).subscribe((area) => {
@@ -49,6 +57,12 @@ export class AreaCreateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+
+    if (this.areaForm.invalid) {
+      return;
+    }
+
     this.areaService.CreateArea(this.areaForm.value).subscribe((area) => {
       this.dialogRef.close();
     });

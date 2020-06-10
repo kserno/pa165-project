@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {CreatureService} from '../service/creature.service';
-import {FormBuilder, FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
 
 interface CreatureDialogData {
   creature?: Creature;
@@ -17,6 +17,8 @@ export class CreatureCreateComponent implements OnInit {
   creatureForm;
   isEdit = this.data !== null && this.data.creature !== null;
 
+  submitted = false;
+
   constructor(public dialogRef: MatDialogRef<CreatureCreateComponent>,
               private creatureService: CreatureService,
               private formBuilder: FormBuilder,
@@ -27,18 +29,18 @@ export class CreatureCreateComponent implements OnInit {
     if (this.data !== null && this.data.creature !== null) {
       this.creatureForm = this.formBuilder.group({
         id: [this.data.creature.id],
-        name: [this.data.creature.name],
-        height: [this.data.creature.height],
-        weight: [this.data.creature.weight],
-        agility: [this.data.creature.agility],
+        name: [this.data.creature.name, [Validators.required]],
+        height: [this.data.creature.height, [Validators.required]],
+        weight: [this.data.creature.weight, [Validators.required]],
+        agility: [this.data.creature.agility, [Validators.required]],
         image: [this.data.creature.image]
       });
     } else {
       this.creatureForm = this.formBuilder.group({
-        name: [],
-        height: [],
-        agility: [],
-        weight: [],
+        name: ['', [Validators.required]],
+        height: ['', [Validators.required]],
+        agility: ['', [Validators.required]],
+        weight: ['', [Validators.required]],
         image: []
       });
     }
@@ -46,6 +48,12 @@ export class CreatureCreateComponent implements OnInit {
   }
 
   onUpdate() {
+    this.submitted = true;
+
+    if (this.creatureForm.invalid) {
+      return;
+    }
+
     const data = this.creatureForm.value;
     this.creatureService.UpdateCreature(data).subscribe((creature) => {
       this.dialogRef.close();
@@ -53,6 +61,12 @@ export class CreatureCreateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+
+    if (this.creatureForm.invalid) {
+      return;
+    }
+
     this.creatureService.CreateCreature(this.creatureForm.value).subscribe((creature) => {
       this.dialogRef.close();
     });

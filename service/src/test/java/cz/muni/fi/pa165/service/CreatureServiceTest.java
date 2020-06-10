@@ -79,7 +79,6 @@ public class CreatureServiceTest extends AbstractTestNGSpringContextTests {
         when(creature.getAreas()).thenReturn(mock(List.class));
 
         creatureService.addCreatureToArea(creature, area);
-//        Mockito.verify(creature.getAreas()).contains(area);
         Mockito.verify(creature.getAreas(), times(1)).add(area);
     }
 
